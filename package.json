@@ -6,7 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build-image": "docker build -t kevinpaternina/containerized-demo-angular-frontend_nginx .",
+    "stop-image": "docker rm -f containerized-angular-frontend_nginx",
+    "start-image": "npm run stop-image && npm run build-image && docker run -dp 80:80 --restart unless-stopped --name containerized-angular-frontend_nginx kevinpaternina/containerized-demo-angular-frontend_nginx",
+    "push-image": "docker push kevinpaternina/containerized-demo-angular-frontend_nginx",
+    "update-image": "npm run build-image && npm run push-image"
   },
   "private": true,
   "dependencies": {
